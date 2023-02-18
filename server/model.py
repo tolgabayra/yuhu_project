@@ -10,8 +10,8 @@ class User(db.Model):
     username = db.Column(db.String(255), nullable=False)
     password = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False)
-    first_name = db.Column(db.String(255), nullable=False)
-    last_name = db.Column(db.String(255), nullable=False)
+    first_name = db.Column(db.String(255), nullable=True)
+    last_name = db.Column(db.String(255), nullable=True)
     profile_image = db.Column(db.String(255))
     cover_image = db.Column(db.String(255))
     bio = db.Column(db.String(255))
@@ -20,7 +20,16 @@ class User(db.Model):
     posts = db.relationship('Post', backref='user')
     comments = db.relationship('Comment', backref='user')
     followers = db.relationship('Follower', back_populates='user')
-    followings = db.relationship('Following', back_populates='user')
+    followings = db.relationship('Following', back_populates='user', foreign_keys='Following.follower_id')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
 
 
 class Post(db.Model):
@@ -71,8 +80,7 @@ class Following(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    user = db.relationship('User', back_populates='followings')
-
+    user = db.relationship('User', back_populates='followings', foreign_keys='Following.user_id')
 
 class Message(db.Model):
     __tablename__ = 'messages'
@@ -120,3 +128,5 @@ class Notification(db.Model):
 # alıcısını tanımlayan tüm bilgileri ve ilişkileri içerir. Notification: Bildirimler modeli, her bildirimin birincil
 # anahtarının bildirim kimliği (notification_id) olduğu bir tablodur. Bu model, bir kullanıcının bir bildirim
 # almasını tanımlayan tüm bilgileri ve ilişkileri içerir.
+
+

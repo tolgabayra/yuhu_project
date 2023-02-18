@@ -2,9 +2,8 @@ from model import User
 from util.helper import Helper
 from typing import Optional
 from werkzeug.security import generate_password_hash
-from flask_sqlalchemy import SQLAlchemy
+from model import db
 
-db = SQLAlchemy()
 
 class AuthService:
 
