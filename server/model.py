@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from werkzeug.security import check_password_hash
 
 db = SQLAlchemy()
 
@@ -30,6 +31,9 @@ class User(db.Model):
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
 
 class Post(db.Model):
