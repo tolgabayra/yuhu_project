@@ -4,6 +4,7 @@ from flask_cors import CORS
 from config import Config
 from model import db
 
+from controller .auth_controller import auth_controller
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -15,6 +16,8 @@ def create_app(config_class=Config):
         db.create_all()
     # cors
     CORS(app)
+
+    app.register_blueprint(auth_controller, url_prefix="/api/v1")
 
     return app
 
