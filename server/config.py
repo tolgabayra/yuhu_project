@@ -6,3 +6,4 @@ class Config:
     JWT_ACCESS_TOKEN_EXPIRES = os.getenv("JWT_ACCESS_TOKEN_EXPIRES")
     JWT_TOKEN_LOCATION = ['cookies']
     SESSION_COOKIE_HTTPONLY = True
+    APP_RUN = "Development"
