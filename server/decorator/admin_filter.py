@@ -1,6 +1,7 @@
 from functools import wraps
 from flask import request, jsonify
 import jwt
+import os
 
 
 def admin_required(f):
@@ -19,7 +20,7 @@ def admin_required(f):
             return jsonify({'message': 'Authorization header is missing'}), 401
         try:
             token = auth_header.split(" ")[1]
-            payload = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+            payload = jwt.decode(token, os.getenv("SECRET_KEY"), algorithms=["HS256"])
             if payload['role'] != 'admin':
                 return jsonify({'message': 'Unauthorized access, admin role required'}), 401
         except jwt.exceptions.InvalidSignatureError:
