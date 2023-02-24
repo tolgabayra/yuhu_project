@@ -3,3 +3,10 @@
 ### Backend
 
 * Python - Flask </br>
+* SQLAlchemy </br>
+* PostgreSQL 
+
+
+
+
+## Frontend
