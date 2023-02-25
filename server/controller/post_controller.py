@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify
 from service.post_service import PostService
 
 post_controller = Blueprint("post_controller", __name__)
@@ -8,7 +8,10 @@ post_controller = Blueprint("post_controller", __name__)
 def create_post():
     data = request.get_json()
     post = PostService.create(data)
-    return jsonify(post), 201
+
+    print("POST: ", post)
+
+    return jsonify("Post Created Successfully."), 201
 
 
 @post_controller.route("/", methods=["GET"])
@@ -23,10 +26,10 @@ def show_post(id):
     if post:
         return jsonify(post), 200
     else:
-        return jsonify("user not found"), 404
+        return jsonify("Post not found"), 404
 
 
-@post_controller.route("/<int:id>/", methods=['DELETE'])
+@post_controller.route("/<int:id>", methods=['DELETE'])
 def delete_user(id):
     result = PostService.delete(id)
     if result:

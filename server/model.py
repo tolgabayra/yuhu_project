@@ -47,6 +47,11 @@ class Post(db.Model):
     comments = db.relationship('Comment', backref='post')
     likes = db.relationship('Like', backref='post')
 
+    def to_dict(self):
+        return {
+            'id': self.id
+        }
+
 
 class Comment(db.Model):
     __tablename__ = 'comments'

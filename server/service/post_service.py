@@ -11,8 +11,15 @@ class PostService:
             content=data["content"],
             media=data["media"],
         )
-        db.session(post)
+        db.session.add(post)
         db.session.commit()
+        print("-------------BAŞARILI--------------------")
+        print("-------------BAŞARILI--------------------")
+        print("-------------BAŞARILI--------------------")
+        print("-------------BAŞARILI--------------------")
+        print("-------------BAŞARILI--------------------")
+        print("-------------BAŞARILI--------------------")
+
         return post
 
     @staticmethod
