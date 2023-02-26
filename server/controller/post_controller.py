@@ -4,20 +4,38 @@ from service.post_service import PostService
 post_controller = Blueprint("post_controller", __name__)
 
 
+
+# @post_controller.route("/", methods=["POST"])
+# def create_post():
+#     if 'json' in request.content_type:
+#         data = request.get_json()
+#     else:
+#         data = request.form.to_dict()
+#
+#     file = request.files.get('file')
+#
+#     post = PostService.create(data, file)
+#     return jsonify({"Message": "Post Created Successfully.", "post": post.to_dict()}), 201
+
+
 @post_controller.route("/", methods=["POST"])
 def create_post():
-    data = request.get_json()
-    print("DATA: ", request.form)
-    file = request.files['media']
-    print("THIS: ", file.name)
-    post = PostService.create(data)
+    print("--------------------------------------")
+    data = request.form
+    print(data)
+
+    file = request.files['deneme']
+    print(file.filename)
+
+    post = PostService.create(data, file)
     return jsonify({"Message": "Post Created Successfully.", "post": post.to_dict()}), 201
 
 
 @post_controller.route("/", methods=["GET"])
 def list_post():
     posts = PostService.list()
-    return jsonify(posts), 200
+    print(posts)
+    return jsonify({"posts": posts}), 200
 
 
 @post_controller.route("/<int:id>", methods=["GET"])
