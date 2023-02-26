@@ -1,4 +1,5 @@
 from flask import current_app
+from flask import send_file
 from model import Post
 from model import db
 import os
@@ -70,7 +71,12 @@ class PostService:
 
     @staticmethod
     def show(id):
-        return Post.query.get(id)
+        post = Post.query.get(id)
+        media_file_path = os.path.join(current_app.root_path, post.media)
+        if os.path.isfile(media_file_path):
+            return send_file(media_file_path)
+        else:
+            return {'id': post.id, 'user_id': post.user_id, 'content': post.content, 'media': post.media}
 
     @staticmethod
     def delete(id):

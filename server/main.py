@@ -7,7 +7,7 @@ from model import db
 
 
 def create_app(config_class=Config):
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder="uploads")
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://root:root@localhost/postgres'
     app.config.from_object(config_class)
     app.config['UPLOAD_FOLDER'] = 'uploads'
