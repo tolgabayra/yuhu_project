@@ -7,11 +7,11 @@ post_controller = Blueprint("post_controller", __name__)
 @post_controller.route("/", methods=["POST"])
 def create_post():
     data = request.get_json()
+    print("DATA: ", request.form)
+    file = request.files['media']
+    print("THIS: ", file.name)
     post = PostService.create(data)
-
-    print("POST: ", post)
-
-    return jsonify("Post Created Successfully."), 201
+    return jsonify({"Message": "Post Created Successfully.", "post": post.to_dict()}), 201
 
 
 @post_controller.route("/", methods=["GET"])

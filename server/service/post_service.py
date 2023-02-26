@@ -6,10 +6,11 @@ class PostService:
 
     @staticmethod
     def create(data):
+        print(data)
+        print("---------------------SERVICE----------------")
         post = Post(
             user_id=data["user_id"],
-            content=data["content"],
-            media=data["media"],
+            content=data["content"]
         )
         db.session.add(post)
         db.session.commit()
