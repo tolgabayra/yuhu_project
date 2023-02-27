@@ -76,7 +76,7 @@ class PostService:
         if os.path.isfile(media_file_path):
             return send_file(media_file_path)
         else:
-            return {'id': post.id, 'user_id': post.user_id, 'content': post.content, 'media': post.media}
+            return post.to_dict()
 
     @staticmethod
     def delete(id):
