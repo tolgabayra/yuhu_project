@@ -33,13 +33,6 @@ class PostService:
             db.session.add(post)
             db.session.commit()
             db.session.refresh(post)
-            print("-------------BAŞARILI--------------------")
-            print("-------------BAŞARILI--------------------")
-            print("-------------BAŞARILI--------------------")
-            print("-------------BAŞARILI--------------------")
-            print("-------------BAŞARILI--------------------")
-            print("-------------BAŞARILI--------------------")
-
             return post
 
     @staticmethod
@@ -47,9 +40,14 @@ class PostService:
         post = Post.query.get(id)
         if post:
             for key, value in data.items():
-                setattr(post, key, value)
+                if hasattr(post, key):
+                    setattr(post, key, value)
+            try:
                 db.session.commit()
                 return True
+            except:
+                db.session.rollback()
+                return False
         else:
             return False
 

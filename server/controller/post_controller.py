@@ -58,7 +58,7 @@ def delete_user(id):
 
 @post_controller.route("/<int:id>", methods=["PUT"])
 def update_user(id):
-    result = PostService.update(id, request.get_json())
+    result = PostService.update(request.get_json(), id)
     if result:
         return jsonify("Post has been updated."), 200
     else:
