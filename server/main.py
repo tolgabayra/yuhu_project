@@ -3,6 +3,7 @@ from flask_cors import CORS
 from controller.auth_controller import auth_controller
 from controller.post_controller import post_controller
 from controller.like_controller import like_controller
+
 from config import Config
 from model import db
 
@@ -20,6 +21,7 @@ def create_app(config_class=Config):
     # cors
     CORS(app)
     app.register_blueprint(auth_controller, url_prefix="/api/v1/auth")
+    app.register_blueprint()
     app.register_blueprint(like_controller, url_prefix="/api/v1/likes")
     app.register_blueprint(post_controller, url_prefix="/api/v1/posts")
 

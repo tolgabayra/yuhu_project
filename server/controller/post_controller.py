@@ -46,7 +46,7 @@ def show_post(id):
 def delete_user(id):
     result = PostService.delete(id)
     if result:
-        return jsonify("Post has been delted."), 200
+        return jsonify("Post has been deleted."), 200
     else:
         return "Post not found", 404
 

@@ -67,6 +67,16 @@ class Comment(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'post_id': self.post_id,
+            'content': self.content,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
+
 
 class Like(db.Model):
     __tablename__ = 'likes'
