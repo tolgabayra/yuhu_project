@@ -9,4 +9,7 @@
 
 
 
-## Frontend
+### Frontend
+
+* NextJS
+* Chakra UI
