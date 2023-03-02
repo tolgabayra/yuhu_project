@@ -1,12 +1,29 @@
 import React, { useState } from 'react'
 import { Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
 import Link from 'next/link'
+import { signIn } from 'next-auth/react'
 
 
 
 export default function login() {
   const [show, setShow] = useState(false)
   const handleClick = () => setShow(!show)
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+
+
+  const handleLogin = async () => {
+    const result = await  signIn("credentials", {
+      email: email,
+      password: password,
+      redirect: true,
+      callbackUrl: "/home"
+    })
+  }
+
+
 
   return (
     <div>
@@ -15,12 +32,13 @@ export default function login() {
           <div className="py-8">
             <img width="30" className="-mt-10" src="https://www.paypalobjects.com/images/shared/momgram@2x.png" />
           </div>
-          <Input size="lg" borderColor="blue.500" placeholder='Email' />
+          <Input onChange={(e)=>setEmail(e.target.value)} size="lg" borderColor="blue.500" placeholder='Email' />
           <div className="flex flex-col space-y-1">
             <InputGroup size='lg'>
               <Input
                 borderColor="blue.500"
                 pr='4.5rem'
+                onChange={(e)=>setPassword(e.target.value)}
                 type={show ? 'text' : 'password'}
                 placeholder='Enter password'
               />
@@ -33,7 +51,7 @@ export default function login() {
             <Link className='font-bold text-[#0070ba]' href="/reset_password">Forgot Password</Link>  
           </div>
           <div className="flex flex-col space-y-5 w-full">
-            <Button colorScheme='blue'>Log In</Button>
+            <Button onClick={handleLogin} colorScheme='blue'>Log In</Button>
             <div className="flex items-center justify-center border-t-[1px] border-t-slate-300 w-full relative">
               <div className="-mt-1 font-bod bg-white px-5 absolute">Or</div>
             </div>
@@ -57,3 +75,6 @@ export default function login() {
     </div>
   )
 }
+
+
+

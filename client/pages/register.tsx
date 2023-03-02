@@ -6,6 +6,18 @@ import React, { useState } from 'react'
 export default function register() {
   const [show, setShow] = useState(false)
   const handleClick = () => setShow(!show)
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+
+  const handleRegister = async () => {
+    
+  }
+
+
+
+
   return (
     <div>
        <div className="min-h-screen flex justify-center items-center bg-white">
