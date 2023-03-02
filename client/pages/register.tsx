@@ -1,6 +1,9 @@
+import { appAxios } from '@/utils/appAxios'
 import { Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react'
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { useToast } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 
 
 export default function register() {
@@ -10,9 +13,42 @@ export default function register() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  const toast = useToast()
+  const router = useRouter()
 
-  const handleRegister = async () => {
-    
+  const handleRegister = () => {
+    appAxios.post("/api/v1/auth/register", {
+      username,
+      email,
+      password
+    })
+    .then((res) => {
+      toast({
+        title: 'Account created.',
+        position: 'top',
+        description: "We've created your account for you.",
+        status: 'success',
+        duration: 1000,
+        isClosable: true,
+      })
+      console.log(res);
+      setTimeout(() => {
+        router.push("/login")
+      }, 1000);
+      
+    })
+    .catch(err=>{
+      toast({
+        title: 'Account not created!.',
+        position: 'top',
+        description: "Check your credentials",
+        status: 'warning',
+        duration: 1000,
+        isClosable: true,
+      })
+      console.log(err);
+      
+    })
   }
 
 
@@ -20,19 +56,20 @@ export default function register() {
 
   return (
     <div>
-       <div className="min-h-screen flex justify-center items-center bg-white">
+      <div className="min-h-screen flex justify-center items-center bg-white">
         <div className="p-10 border-[1px] -mt-10 border-slate-200 rounded-md flex flex-col items-center space-y-3">
           <div className="py-8">
             <img width="30" className="-mt-10" src="https://www.paypalobjects.com/images/shared/momgram@2x.png" />
           </div>
           <div className="flex flex-col space-y-2">
-          <Input size="lg" borderColor="blue.500" placeholder='Username' />
-          <Input size="lg" borderColor="blue.500" placeholder='Email' />
+            <Input onChange={(e) => setUsername(e.target.value)} size="lg" borderColor="blue.500" placeholder='Username' />
+            <Input onChange={(e) => setEmail(e.target.value)} size="lg" borderColor="blue.500" placeholder='Email' />
 
             <InputGroup size='lg'>
               <Input
                 borderColor="blue.500"
                 pr='4.5rem'
+                onChange={(e) => setPassword(e.target.value)}
                 type={show ? 'text' : 'password'}
                 placeholder='Enter password'
               />
@@ -44,7 +81,7 @@ export default function register() {
             </InputGroup>
           </div>
           <div className="flex flex-col space-y-5 w-full">
-            <Button colorScheme='blue'>Register</Button>
+            <Button onClick={handleRegister} colorScheme='blue'>Register</Button>
             <div className="flex items-center justify-center border-t-[1px] border-t-slate-300 w-full relative">
               <div className="-mt-1 font-bod bg-white px-5 absolute">Or</div>
             </div>
