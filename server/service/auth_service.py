@@ -1,6 +1,6 @@
 from model import User
 from util.helper import Helper
-from typing import Optional
+from typing import Optional, Dict, Any
 from werkzeug.security import generate_password_hash
 from model import db
 
@@ -8,13 +8,14 @@ from model import db
 class AuthService:
 
     @staticmethod
-    def login(email: str, password: str) -> Optional[str]:
+    def login(email: str, password: str) -> dict[str, Any] | None:
         user = User.query.filter_by(email=email).first()
         if user is None or not user.check_password(password):
             return None
 
         access_token = Helper.generate_access_token(user.id)
-        return access_token
+        user_id = user.id
+        return {"access_token": access_token, "user_id": user_id}
 
     @staticmethod
     def register(username, email, password):

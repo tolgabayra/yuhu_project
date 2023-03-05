@@ -11,12 +11,12 @@ def login():
     password = data["password"]
 
 
-    access_token = AuthService.login(email, password)
-    if access_token is None:
+    data = AuthService.login(email, password)
+    if data["access_token"] is None:
         return jsonify({"message": "Invalid email or password"}), 401
 
-    response = jsonify({"access_token": access_token})
-    response.set_cookie('access_token', access_token, httponly=True)
+    response = jsonify({"access_token": data["access_token"], "user_id": data["user_id"]})
+    response.set_cookie('access_token', data["access_token"], httponly=True)
     return response, 200
 
 
