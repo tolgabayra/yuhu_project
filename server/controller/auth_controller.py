@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, make_response
 from service.auth_service import AuthService
 from util.helper import Helper
+
 auth_controller = Blueprint("auth_controller", __name__)
 
 
@@ -9,7 +10,6 @@ def login():
     data = request.get_json()
     email = data["email"]
     password = data["password"]
-
 
     data = AuthService.login(email, password)
     if data["access_token"] is None:
@@ -45,3 +45,11 @@ def decode_jwt():
 
     return jsonify({"user_id": decode_token})
 
+
+@auth_controller.route("/me/<int:user_id>", methods=["GET"])
+def get_information(user_id):
+    user = AuthService.get_me(user_id)
+    if user is None:
+        return jsonify({"Message": "User not found "}), 404
+    else:
+        return jsonify(user), 200

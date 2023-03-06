@@ -24,3 +24,12 @@ class AuthService:
         db.session.add(user)
         db.session.commit()
         return user
+
+    @staticmethod
+    def get_me(user_id) -> Optional[Dict[str, Any]]:
+        user = User.query.filter_by(id=user_id).first()
+        if user is None:
+            return None
+
+
+        return {"username": user.username, "email": user.email}
