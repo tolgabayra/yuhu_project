@@ -11,5 +11,5 @@
 
 ### Frontend
 
-* NextJS
+* ReactJS
 * Chakra UI
