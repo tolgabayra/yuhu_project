@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_caching import Cache
 from flask_cors import CORS
 from controller.auth_controller import auth_controller
 from controller.post_controller import post_controller
@@ -15,6 +16,10 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
     app.config['UPLOAD_FOLDER'] = 'uploads'
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
+    cache = Cache(config={"CACHE_TYPE": "SimpleCache"})
+    cache.init_app(app)
+
 
     db.init_app(app)
     with app.app_context():

@@ -7,3 +7,4 @@ class Config:
     JWT_TOKEN_LOCATION = ['cookies']
     SESSION_COOKIE_HTTPONLY = True
     APP_RUN = "Development"
+    CACHE_TYPE = "SimpleCache"
