@@ -1,12 +1,12 @@
-import { Avatar, Box, Button, Card, CardBody, CardFooter, CardHeader, Flex, Heading, IconButton, Image, Text } from '@chakra-ui/react'
 import React from 'react'
-import { BiLike, BiChat, BiShare } from "react-icons/bi"
-import Navbar from '../components/home/Navbar'
+import { Card, CardHeader, CardBody, Flex, Avatar, CardFooter, Box, Text, Heading, IconButton, Image, Button } from '@chakra-ui/react'
 
-export default function Home() {
+
+type Props = {}
+
+export default function Card({ }: Props) {
   return (
-    <div>
-
+    <>
       <Card maxW='md'>
         <CardHeader>
           <Flex spacing='4'>
@@ -59,13 +59,6 @@ export default function Home() {
         </CardFooter>
       </Card>
 
-
-
-
-    </div>
+    </>
   )
 }
-
-
-
-

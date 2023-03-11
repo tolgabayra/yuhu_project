@@ -1,5 +1,6 @@
 import { Button, Input, InputGroup, InputRightElement, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { appAxios } from '../utils/appAxios'
 
 type Props = {}
@@ -13,7 +14,7 @@ export default function Register({ }: Props) {
   const handleClick = () => setShow(!show)
 
   const toast = useToast()
-
+  const navigate = useNavigate()
 
   const handleRegister = () => {
     appAxios.post("/api/v1/auth/register",{
@@ -30,6 +31,9 @@ export default function Register({ }: Props) {
         duration: 1000,
         isClosable: true,
       })
+      setTimeout(() => {
+        navigate("/login")
+      }, 1000)
     })
     .catch(err=>{
       console.log(err);

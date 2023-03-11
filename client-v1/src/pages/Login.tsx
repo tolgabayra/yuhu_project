@@ -1,5 +1,8 @@
 import { Button, Input, InputGroup, InputRightElement, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { login } from '../features/authSlice'
 import { appAxios } from '../utils/appAxios'
 type Props = {}
 
@@ -11,7 +14,8 @@ export default function Login({ }: Props) {
   const handleClick = () => setShow(!show)
 
   const toast = useToast()
-
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
 
 
@@ -29,6 +33,13 @@ export default function Login({ }: Props) {
           duration: 1000,
           isClosable: true,
         })
+
+        setTimeout(() => {
+          dispatch(login())
+          navigate("/home")
+        }, 1000)
+        
+        localStorage.setItem("user_id", res.data.user_id)
       })
       .catch(err => {
         console.log(err);
