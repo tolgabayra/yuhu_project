@@ -1,6 +1,5 @@
 from flask import Blueprint, jsonify, request
 from service.comment_service import CommentService
-
 comment_controller = Blueprint("comment_controller", __name__)
 
 

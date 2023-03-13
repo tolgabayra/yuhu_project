@@ -7,4 +7,6 @@ class Config:
     JWT_TOKEN_LOCATION = ['cookies']
     SESSION_COOKIE_HTTPONLY = True
     APP_RUN = "Development"
-    CACHE_TYPE = "SimpleCache"
+    REDIS_HOST = 'localhost'
+    REDIS_PORT = 6379
+    REDIS_DB = 0

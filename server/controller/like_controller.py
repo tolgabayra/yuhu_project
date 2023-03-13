@@ -1,6 +1,6 @@
 from flask import Blueprint, json, jsonify, request
 from service.like_service import LikeService
-
+from main import cache
 like_controller = Blueprint("like_controller", __name__)
 
 
@@ -12,6 +12,7 @@ def create_like():
 
 
 # List all like
+@cache.cached(timeout=50)
 @like_controller.route("/", methods=["GET"])
 def list_like():
     likes = LikeService.list()

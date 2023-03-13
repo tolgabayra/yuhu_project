@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_caching import Cache
 from flask_cors import CORS
 from controller.auth_controller import auth_controller
 from controller.post_controller import post_controller
@@ -8,6 +7,12 @@ from controller.comment_controller import comment_controller
 
 from config import Config
 from model import db
+from flask_caching import Cache
+
+cache = Cache(config={
+    "CACHE_TYPE": "redis",
+    "CACHE_REDIS_URL": "redis://localhost:6379"
+})
 
 
 def create_app(config_class=Config):
@@ -17,9 +22,8 @@ def create_app(config_class=Config):
     app.config['UPLOAD_FOLDER'] = 'uploads'
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-    cache = Cache(config={"CACHE_TYPE": "SimpleCache"})
-    cache.init_app(app)
 
+    cache.init_app(app)
 
     db.init_app(app)
     with app.app_context():
