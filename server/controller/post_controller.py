@@ -3,8 +3,6 @@ from service.post_service import PostService
 
 post_controller = Blueprint("post_controller", __name__)
 
-
-
 # @post_controller.route("/", methods=["POST"])
 # def create_post():
 #     if 'json' in request.content_type:

@@ -58,6 +58,8 @@ class PostService:
         for post in posts:
             post_list.append({
                 "id": post.id,
+                "username": post.user.username,
+                "email": post.user.email,
                 "user_id": post.user_id,
                 "content": post.content,
                 "media": post.media,
