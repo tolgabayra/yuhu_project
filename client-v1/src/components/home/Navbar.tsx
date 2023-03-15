@@ -1,3 +1,4 @@
+import { Avatar, Wrap, WrapItem } from '@chakra-ui/react'
 import React from 'react'
 
 type Props = {}
@@ -17,8 +18,11 @@ export default function Navbar({ }: Props) {
 
 
             <div className="hidden sm:flex sm:items-center">
-              <a href="#" className="text-gray-800 text-sm font-semibold hover:text-gray-600 mr-12">Tolga BAYRAK</a>
-              <a href="#" className="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-gray-600 hover:border-gray-600">Log out</a>
+              <WrapItem className='mr-6'>
+                <Avatar name='Ryan Florence' src='https://bit.ly/ryan-florence' />
+              </WrapItem>
+
+              <a href="#" className="text-gray-800 text-sm font-semibold border px-4 py-2 ounded-lg hover:text-gray-600 hover:border-gray-600">Log out</a>
             </div>
 
             <div className="sm:hidden cursor-pointer">

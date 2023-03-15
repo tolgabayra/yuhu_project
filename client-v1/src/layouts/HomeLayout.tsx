@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import Navbar from '../components/home/Navbar'
 
 type Props = {}
@@ -16,9 +16,9 @@ export default function HomeLayout({ }: Props) {
 
 
                             <ul className="flex flex-col overflow-hidden font-serif">
-                                <li className='bg-gray-300 mb-3 p-1 rounded-sm hover:bg-gray-400 hover:text-gray-100 duration-300 hover:cursor-pointer'>Home</li>
-                                <li className='bg-gray-300 mb-3 p-1 rounded-sm hover:bg-gray-400 hover:text-gray-100 duration-300 hover:cursor-pointer'>Profile</li>
-                                <li className='bg-gray-300 mb-3 p-1 rounded-sm hover:bg-gray-400 hover:text-gray-100 duration-300 hover:cursor-pointer'>Settings</li>
+                                <Link to={"/home"} className='bg-gray-300 mb-3 p-1 rounded-sm hover:bg-gray-400 hover:text-gray-100 duration-300 hover:cursor-pointer'>Home</Link>
+                                <Link to={"profile"} className='bg-gray-300 mb-3 p-1 rounded-sm hover:bg-gray-400 hover:text-gray-100 duration-300 hover:cursor-pointer'>Profile</Link>
+                                <Link to={"settings"} className='bg-gray-300 mb-3 p-1 rounded-sm hover:bg-gray-400 hover:text-gray-100 duration-300 hover:cursor-pointer'>Settings</Link>
                                 <li className=' bg-gray-300 p-1 rounded-sm hover:bg-gray-400 hover:text-gray-100 duration-300 hover:cursor-pointer'>Log out</li>
 
                             </ul>

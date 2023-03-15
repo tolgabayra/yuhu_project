@@ -3,6 +3,7 @@ import HomeLayout from "./layouts/HomeLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotFoundPage from "./pages/NotFoundPage";
+import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 
 export default function Router(){
@@ -11,7 +12,8 @@ export default function Router(){
             path: "home",
             element: <HomeLayout />,
             children: [
-                {path: "", element: <Home />}
+                {path: "", element: <Home />},
+                {path: "profile", element: <Profile />}
             ]
         },
         {
@@ -26,6 +28,8 @@ export default function Router(){
         {
             path: "*",
             element: <NotFoundPage />
-        }
+        },
+       
+        
     ])
 }
