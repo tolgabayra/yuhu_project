@@ -1,6 +1,6 @@
 from flask import Blueprint, json, jsonify, request
 from service.like_service import LikeService
-from main import cache
+from cache import cache
 like_controller = Blueprint("like_controller", __name__)
 
 

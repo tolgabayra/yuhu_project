@@ -10,3 +10,5 @@ class Config:
     REDIS_HOST = 'localhost'
     REDIS_PORT = 6379
     REDIS_DB = 0
+    CACHE_TYPE = "redis"
+    CACHE_REDIS_URL = "redis://localhost:6379"
