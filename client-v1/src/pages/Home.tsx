@@ -227,7 +227,6 @@ export default function Home() {
               <CardBody>
                 <Text>
                   {post.content}
-                  {post.media}
                 </Text>
               </CardBody>
               <Image
